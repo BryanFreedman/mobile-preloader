@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fast Mobile Navigation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        .link {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 1.5em;
+            height: 100vh; /* Make each link fill the viewport height */
+            line-height: 100vh; /* Vertically center the text */
+            text-decoration: none;
+            color: #000;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        #content {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #333;
+        }
+
+        @media (min-width: 600px) {
+            .link {
+                height: auto;
+                line-height: normal;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fast Mobile Navigation Example</h1>
+        <div id="links">
+            <a href="#" class="link" data-url="page1.html">Page 1</a>
+            <a href="#" class="link" data-url="page2.html">Page 2</a>
+            <a href="#" class="link" data-url="page3.html">Page 3</a>
+            <a href="#" class="link" data-url="page4.html">Page 4</a>
+        </div>
+        <div id="content">Click a link to load its content here.</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
