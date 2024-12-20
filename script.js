@@ -17,23 +17,23 @@ if (isMobile()) {
         }
     };
 
-    // Function to dump preloaded content
-    const dumpContent = (url) => {
-        if (preloadedPages.has(url)) {
-            preloadedPages.delete(url);
-            console.log(`Dumped: ${url}`);
-        }
-    };
-
     // Function to handle link clicks
     const handleClick = (event) => {
         event.preventDefault();
         const url = event.target.dataset.url;
+
         if (preloadedPages.has(url)) {
             document.getElementById('content').innerHTML = preloadedPages.get(url);
             console.log(`Loaded from preload: ${url}`);
         } else {
-            document.getElementById('content').textContent = 'Content loading failed or not preloaded.';
+            // Fallback in case the page wasn't preloaded
+            fetch(url)
+                .then((response) => response.text())
+                .then((html) => {
+                    document.getElementById('content').innerHTML = html;
+                    console.log(`Loaded directly: ${url}`);
+                })
+                .catch((error) => console.error(`Failed to load directly: ${url}`, error));
         }
     };
 
@@ -44,7 +44,9 @@ if (isMobile()) {
             if (entry.isIntersecting) {
                 preloadContent(url);
             } else {
-                dumpContent(url);
+                // Optionally, dump content if needed to save memory
+                preloadedPages.delete(url);
+                console.log(`Dumped: ${url}`);
             }
         });
     });
